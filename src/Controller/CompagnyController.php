@@ -11,7 +11,7 @@ class CompagnyController extends AbstractController
     #[Route('/compagny', name: 'app_compagny')]
     public function index(): Response
     {
-        return $this->render('compagny/index.html.twig', [
+        return $this->render('compagny/compagny.html.twig', [
             'controller_name' => 'CompagnyController',
         ]);
     }

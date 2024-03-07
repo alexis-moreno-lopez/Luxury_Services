@@ -1,14 +1,4 @@
-<!DOCTYPE html>
 
-        
-
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
 <html class="no-js" lang="en"> <!--<![endif]-->
 {# <title>{% block title %}Welcome!{% endblock %}</title> #}
 <head>
@@ -20,10 +10,14 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="idmkr.io">
-    <meta name="base_url" content="https://assets-luxury.projets.garage404.com">
-    <meta name="csrf-token" content="utSEZUUxgneXBCQY5My9Djz8rVhqLiG7PLq3ThDA">
-    <!--  favicon -->
-    <link rel="shortcut icon" href="assets/img/luxury-services-logo.png">
+
+{%  block metaEtLinkSupplementaire %}
+
+{% endblock %}
+
+
+
+
 
     <script>
         window.isMobile = (function() {
@@ -37,11 +31,8 @@
             $(handler);
         }
     </script>
+    <link href="/assets/css/main.css" rel="stylesheet">
 
-
-
-
- 
     <link href="https://assets-luxury.projets.garage404.com/css/materialize.css" rel="stylesheet">
     <link href="https://assets-luxury.projets.garage404.com/css/bootstrap.css" rel="stylesheet">
     <link href="https://assets-luxury.projets.garage404.com/css/style.css" rel="stylesheet">
@@ -49,9 +40,7 @@
     <link href="https://assets-luxury.projets.garage404.com/css/revolution-settings.css" rel="stylesheet">
     <link href="https://assets-luxury.projets.garage404.com/css/revolution-layers.css" rel="stylesheet">
     <link href="https://assets-luxury.projets.garage404.com/css/revolution-navigation.css" rel="stylesheet">
-    <link href="{{asset('/assets/css/main.css') }}" rel="stylesheet">
-{% block stylesheets %}{% endblock %}
-        
+
     <script src="https://assets-luxury.projets.garage404.com/js/modernizr.js"></script>
     <script src="https://assets-luxury.projets.garage404.com/js/jquery.js"></script>
     <script src="https://assets-luxury.projets.garage404.com/js/animated-headline.js"></script>
@@ -84,6 +73,13 @@
     <script src="https://assets-luxury.projets.garage404.com/js/revolution-ext-navigation.js"></script>
     <script src="https://assets-luxury.projets.garage404.com/js/revolution-ext-migration.js"></script>
     <script src="https://assets-luxury.projets.garage404.com/js/revolution-ext-parallax.js"></script>
+
+
+ 
+
+{% block stylesheets %}{% endblock %}
+        
+
 </head>
 
 <body id="top">
@@ -174,6 +170,7 @@
     
     
         {% block body %}{% endblock %}
+        {% block JavascriptDuBas %}{% endblock %}
         <!-- Footer -->
 <footer class="footer footer-four">
     <div class="primary-footer brand-bg text-center">
