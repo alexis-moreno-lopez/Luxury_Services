@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CandidatRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -17,8 +19,7 @@ class Candidat
     #[ORM\Column(type: Types::BIGINT)]
     private ?string $user = null;
 
-    #[ORM\Column]
-    private ?int $gender = null;
+
 
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
@@ -65,14 +66,33 @@ class Candidat
     #[ORM\Column]
     private ?int $jobCategory = null;
 
-    #[ORM\Column]
-    private ?int $experience = null;
+
 
     #[ORM\Column(length: 255)]
     private ?string $adminNote = null;
 
     #[ORM\Column]
     private ?bool $isAvailable = null;
+
+    #[ORM\OneToMany(targetEntity: Apply::class, mappedBy: 'Candidat', orphanRemoval: true)]
+    private Collection $applies;
+
+
+
+    #[ORM\ManyToOne(inversedBy: 'candidats')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Gender $Gender = null;
+
+    #[ORM\ManyToOne(inversedBy: 'duration')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Experience $experience = null;
+
+
+
+    public function __construct()
+    {
+        $this->applies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -91,17 +111,7 @@ class Candidat
         return $this;
     }
 
-    public function getGender(): ?int
-    {
-        return $this->gender;
-    }
 
-    public function setGender(int $gender): static
-    {
-        $this->gender = $gender;
-
-        return $this;
-    }
 
     public function getFirstname(): ?string
     {
@@ -283,17 +293,7 @@ class Candidat
         return $this;
     }
 
-    public function getExperience(): ?int
-    {
-        return $this->experience;
-    }
 
-    public function setExperience(int $experience): static
-    {
-        $this->experience = $experience;
-
-        return $this;
-    }
 
     public function getAdminNote(): ?string
     {
@@ -318,4 +318,59 @@ class Candidat
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Apply>media
+     */
+    public function getApplies(): Collection
+    {
+        return $this->applies;
+    }
+
+    public function addApply(Apply $apply): static
+    {
+        if (!$this->applies->contains($apply)) {
+            $this->applies->add($apply);
+            $apply->setCandidat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApply(Apply $apply): static
+    {
+        if ($this->applies->removeElement($apply)) {
+            // set the owning side to null (unless already changed)
+            if ($apply->getCandidat() === $this) {
+                $apply->setCandidat(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->Gender;
+    }
+
+    public function setGender(?Gender $Gender): static
+    {
+        $this->Gender = $Gender;
+
+        return $this;
+    }
+
+    public function getExperience(): ?Experience
+    {
+        return $this->experience;
+    }
+
+    public function setExperience(?Experience $experience): static
+    {
+        $this->experience = $experience;
+
+        return $this;
+    }
+
 }

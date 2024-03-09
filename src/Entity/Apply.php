@@ -17,8 +17,7 @@ class Apply
     #[ORM\Column(type: Types::BIGINT)]
     private ?string $candidat = null;
 
-    #[ORM\Column(type: Types::BIGINT)]
-    private ?string $jobOffer = null;
+
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
@@ -26,37 +25,40 @@ class Apply
     #[ORM\Column(length: 255)]
     private ?string $adminNote = null;
 
-    #[ORM\Column(type: Types::BIGINT)]
-    private ?string $status = null;
+
+
+    #[ORM\ManyToOne(inversedBy: 'applies')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Jobs $jobs = null;
+
+
+
+    #[ORM\ManyToOne(inversedBy: 'applies')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Candidat $Candidat = null;
+
+    #[ORM\ManyToOne(inversedBy: 'Status')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Status $status = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getCandidat(): ?string
+    public function getCandidat(): ?Candidat
     {
-        return $this->candidat;
+        return $this->Candidat;
     }
 
-    public function setCandidat(string $candidat): static
+    public function setCandidat(Candidat $Candidat): static
     {
-        $this->candidat = $candidat;
+        $this->Candidat = $Candidat;
 
         return $this;
     }
 
-    public function getJobOffer(): ?string
-    {
-        return $this->jobOffer;
-    }
 
-    public function setJobOffer(string $jobOffer): static
-    {
-        $this->jobOffer = $jobOffer;
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -82,12 +84,25 @@ class Apply
         return $this;
     }
 
-    public function getStatus(): ?string
+
+    public function getJobs(): ?Jobs
+    {
+        return $this->jobs;
+    }
+
+    public function setJobs(?Jobs $jobs): static
+    {
+        $this->jobs = $jobs;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): static
+    public function setStatus(?Status $status): static
     {
         $this->status = $status;
 
