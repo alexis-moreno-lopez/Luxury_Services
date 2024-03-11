@@ -16,8 +16,6 @@ class Candidat
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::BIGINT)]
-    private ?string $user = null;
 
 
 
@@ -36,14 +34,7 @@ class Candidat
     #[ORM\Column(length: 255)]
     private ?string $nationality = null;
 
-    #[ORM\Column]
-    private ?int $passport = null;
 
-    #[ORM\Column]
-    private ?int $cv = null;
-
-    #[ORM\Column]
-    private ?int $profilPic = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $birthdate = null;
@@ -79,13 +70,29 @@ class Candidat
 
 
 
-    #[ORM\ManyToOne(inversedBy: 'candidats')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Gender $Gender = null;
 
     #[ORM\ManyToOne(inversedBy: 'duration')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Experience $experience = null;
+
+
+
+    #[ORM\ManyToOne(inversedBy: 'candidats')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Gender $gender = null;
+
+    #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
+    private ?Media $passport = null;
+
+    #[ORM\OneToOne(inversedBy: 'candidatCv', cascade: ['persist', 'remove'])]
+    private ?Media $cv = null;
+
+    #[ORM\OneToOne(inversedBy: 'profilPic', cascade: ['persist', 'remove'])]
+    private ?Media $profilPic = null;
+
+    #[ORM\OneToOne(inversedBy: 'candidatUser', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
 
 
@@ -94,22 +101,13 @@ class Candidat
         $this->applies = new ArrayCollection();
     }
 
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUser(): ?string
-    {
-        return $this->user;
-    }
-
-    public function setUser(string $user): static
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
 
 
@@ -173,41 +171,6 @@ class Candidat
         return $this;
     }
 
-    public function getPassport(): ?int
-    {
-        return $this->passport;
-    }
-
-    public function setPassport(int $passport): static
-    {
-        $this->passport = $passport;
-
-        return $this;
-    }
-
-    public function getCv(): ?int
-    {
-        return $this->cv;
-    }
-
-    public function setCv(int $cv): static
-    {
-        $this->cv = $cv;
-
-        return $this;
-    }
-
-    public function getProfilPic(): ?int
-    {
-        return $this->profilPic;
-    }
-
-    public function setProfilPic(int $profilPic): static
-    {
-        $this->profilPic = $profilPic;
-
-        return $this;
-    }
 
     public function getBirthdate(): ?\DateTimeInterface
     {
@@ -349,17 +312,7 @@ class Candidat
         return $this;
     }
 
-    public function getGender(): ?Gender
-    {
-        return $this->Gender;
-    }
 
-    public function setGender(?Gender $Gender): static
-    {
-        $this->Gender = $Gender;
-
-        return $this;
-    }
 
     public function getExperience(): ?Experience
     {
@@ -369,6 +322,66 @@ class Candidat
     public function setExperience(?Experience $experience): static
     {
         $this->experience = $experience;
+
+        return $this;
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?Gender $gender): static
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getPassport(): ?Media
+    {
+        return $this->passport;
+    }
+
+    public function setPassport(?Media $passport): static
+    {
+        $this->passport = $passport;
+
+        return $this;
+    }
+
+    public function getCv(): ?Media
+    {
+        return $this->cv;
+    }
+
+    public function setCv(?Media $cv): static
+    {
+        $this->cv = $cv;
+
+        return $this;
+    }
+
+    public function getProfilPic(): ?Media
+    {
+        return $this->profilPic;
+    }
+
+    public function setProfilPic(?Media $profilPic): static
+    {
+        $this->profilPic = $profilPic;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -18,6 +18,9 @@ class Experience
     #[ORM\OneToMany(targetEntity: Candidat::class, mappedBy: 'experience', orphanRemoval: true)]
     private Collection $duration;
 
+    #[ORM\Column]
+    private ?int $experience = null;
+
     public function __construct()
     {
         $this->duration = new ArrayCollection();
@@ -54,6 +57,18 @@ class Experience
                 $duration->setExperience(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getExperience(): ?int
+    {
+        return $this->experience;
+    }
+
+    public function setExperience(int $experience): static
+    {
+        $this->experience = $experience;
 
         return $this;
     }

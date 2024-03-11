@@ -15,12 +15,15 @@ class Status
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(targetEntity: Apply::class, mappedBy: 'status', orphanRemoval: true)]
-    private Collection $Status;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $status = null;
+
+    #[ORM\OneToMany(targetEntity: Apply::class, mappedBy: 'status')]
+    private Collection $applies;
 
     public function __construct()
     {
-        $this->Status = new ArrayCollection();
+        $this->applies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -28,30 +31,42 @@ class Status
         return $this->id;
     }
 
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Apply>
      */
-    public function getStatus(): Collection
+    public function getApplies(): Collection
     {
-        return $this->Status;
+        return $this->applies;
     }
 
-    public function addStatus(Apply $status): static
+    public function addApply(Apply $apply): static
     {
-        if (!$this->Status->contains($status)) {
-            $this->Status->add($status);
-            $status->setStatus($this);
+        if (!$this->applies->contains($apply)) {
+            $this->applies->add($apply);
+            $apply->setStatus($this);
         }
 
         return $this;
     }
 
-    public function removeStatus(Apply $status): static
+    public function removeApply(Apply $apply): static
     {
-        if ($this->Status->removeElement($status)) {
+        if ($this->applies->removeElement($apply)) {
             // set the owning side to null (unless already changed)
-            if ($status->getStatus() === $this) {
-                $status->setStatus(null);
+            if ($apply->getStatus() === $this) {
+                $apply->setStatus(null);
             }
         }
 

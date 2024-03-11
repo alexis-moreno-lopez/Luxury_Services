@@ -14,8 +14,7 @@ class Apply
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::BIGINT)]
-    private ?string $candidat = null;
+
 
 
 
@@ -37,9 +36,10 @@ class Apply
     #[ORM\JoinColumn(nullable: false)]
     private ?Candidat $Candidat = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Status')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(inversedBy: 'applies')]
     private ?Status $status = null;
+
+
 
     public function getId(): ?int
     {
@@ -51,7 +51,7 @@ class Apply
         return $this->Candidat;
     }
 
-    public function setCandidat(Candidat $Candidat): static
+    public function setCandidat(?Candidat $Candidat): static
     {
         $this->Candidat = $Candidat;
 
@@ -108,4 +108,5 @@ class Apply
 
         return $this;
     }
+
 }

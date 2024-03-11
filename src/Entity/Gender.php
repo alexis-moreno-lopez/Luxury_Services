@@ -18,13 +18,15 @@ class Gender
     #[ORM\Column(length: 255)]
     private ?string $gender = null;
 
-    #[ORM\OneToMany(targetEntity: Candidat::class, mappedBy: 'Gender', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Candidat::class, mappedBy: 'gender')]
     private Collection $candidats;
 
     public function __construct()
     {
         $this->candidats = new ArrayCollection();
     }
+
+
 
     public function getId(): ?int
     {
@@ -72,4 +74,7 @@ class Gender
 
         return $this;
     }
+
+
+
 }
