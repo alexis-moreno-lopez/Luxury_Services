@@ -25,6 +25,10 @@ class JobCategory
     {
         $this->jobs = new ArrayCollection();
     }
+    public function __toString()
+    {
+        return $this->category;
+    }
 
     public function getId(): ?int
     {

@@ -36,11 +36,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\OneToOne(mappedBy: 'User', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Candidat $candidat = null;
 
-    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Candidat $candidatUser = null;
+    // #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    // private ?Candidat $candidatUser = null;
 
     public function getId(): ?int
     {
@@ -146,20 +146,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCandidatUser(): ?Candidat
-    {
-        return $this->candidatUser;
-    }
+    // public function getCandidatUser(): ?Candidat
+    // {
+    //     return $this->candidatUser;
+    // }
 
-    public function setCandidatUser(Candidat $candidatUser): static
-    {
-        // set the owning side of the relation if necessary
-        if ($candidatUser->getUser() !== $this) {
-            $candidatUser->setUser($this);
-        }
+    // public function setCandidatUser(Candidat $candidatUser): static
+    // {
+    //     // set the owning side of the relation if necessary
+    //     if ($candidatUser->getUser() !== $this) {
+    //         $candidatUser->setUser($this);
+    //     }
 
-        $this->candidatUser = $candidatUser;
+    //     $this->candidatUser = $candidatUser;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

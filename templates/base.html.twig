@@ -76,7 +76,7 @@
     <script src="https://assets-luxury.projets.garage404.com/js/revolution-ext-parallax.js"></script>
 
 
- 
+
 
 {% block stylesheets %}{% endblock %}
         
@@ -101,7 +101,7 @@
                     </div>
                     <div class="icon-wrapper">
                         <span class="account">
-							<a href="/templates/auth/profile.html">
+							<a href="/templates/auth/profil.html">
                                 <i class="material-icons">&#xE7FD;</i>
                             </a>
 						</span>
@@ -109,12 +109,13 @@
                     <div class="nav-overlay" id="overlay">
                         <nav class="overlay-menu">
                             <ul>
-                                <li><a href="/">Home</a></li>
-                                <li><a href="/templates/jobs/index.html">Jobs Offers</a></li>
-                                <li><a href="/templates/compagny.html">About Us</a></li>
-                                <li><a href="/templates/contact/contact.html">Contact</a></li>
-                                <li></li>
-                                <li><a href="/templates/auth/profile.html">Profile</a></li>
+                                <li class="dropdown"><a target="_self" href="{{ path('app_home') }}"><i class=""></i> <span>Home</span></a></li>
+                                <li class="dropdown"><a target="_self" href="{{ path('app_jobs') }}"><i class=""></i> <span>Jobs Offers</span></a></li>
+                                <li class="dropdown"><a target="_self" href="{{ path('app_compagny') }}"><i class=""></i> <span>About Us</span></a></li>
+                                <li class="dropdown"><a target="_self" href="{{ path('app_contact') }}"><i class=""></i> <span>Contact</span></a></li>
+                                {# <li></li>
+                                <li><a href="/templates/auth/profile.html">Profile</a></li> #}
+
                                 <li><a href="/logout.html">Logout</a></li>
                             </ul>
                         </nav>
@@ -165,7 +166,6 @@
         </div>
     </div>
 </header>
-       
 
 
     

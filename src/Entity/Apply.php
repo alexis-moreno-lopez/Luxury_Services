@@ -14,10 +14,6 @@ class Apply
     #[ORM\Column]
     private ?int $id = null;
 
-
-
-
-
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
@@ -34,7 +30,7 @@ class Apply
 
     #[ORM\ManyToOne(inversedBy: 'applies')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Candidat $Candidat = null;
+    private ?Candidat $candidat = null;
 
     #[ORM\ManyToOne(inversedBy: 'applies')]
     private ?Status $status = null;
@@ -48,12 +44,12 @@ class Apply
 
     public function getCandidat(): ?Candidat
     {
-        return $this->Candidat;
+        return $this->candidat;
     }
 
-    public function setCandidat(?Candidat $Candidat): static
+    public function setCandidat(?Candidat $candidat): static
     {
-        $this->Candidat = $Candidat;
+        $this->candidat = $candidat;
 
         return $this;
     }

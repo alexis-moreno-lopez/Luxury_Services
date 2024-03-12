@@ -17,7 +17,7 @@ class Media
     private ?string $url = null;
 
     #[ORM\OneToOne(mappedBy: 'passport', cascade: ['persist', 'remove'])]
-    private ?Candidat $candidat = null;
+    private ?Candidat $candidatPassport = null;
 
     #[ORM\OneToOne(mappedBy: 'cv', cascade: ['persist', 'remove'])]
     private ?Candidat $candidatCv = null;
@@ -46,22 +46,22 @@ class Media
 
     public function getCandidat(): ?Candidat
     {
-        return $this->candidat;
+        return $this->candidatPassport;
     }
 
-    public function setCandidat(?Candidat $candidat): static
+    public function setCandidat(?Candidat $candidatPassport): static
     {
         // unset the owning side of the relation if necessary
-        if ($candidat === null && $this->candidat !== null) {
-            $this->candidat->setPassport(null);
+        if ($candidatPassport === null && $this->candidatPassport !== null) {
+            $this->candidatPassport->setPassport(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($candidat !== null && $candidat->getPassport() !== $this) {
-            $candidat->setPassport($this);
+        if ($candidatPassport !== null && $candidatPassport->getPassport() !== $this) {
+            $candidatPassport->setPassport($this);
         }
 
-        $this->candidat = $candidat;
+        $this->candidatPassport = $candidatPassport;
 
         return $this;
     }

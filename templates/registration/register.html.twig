@@ -37,7 +37,7 @@
 
   {{ form_errors(registrationForm) }}
 
-  <button type="submit" class="btn">Register</button>
+  {# <button type="submit" class="btn">Register</button> #}
 
   <div class="base">
     <!-- Page -->
@@ -71,21 +71,19 @@
               <input type="hidden" name="_token" value="" />
 
               <div class="input-field">
-                <input type="email" name="email" id="email" value="" required data-parsley-trigger="change" data-parsley-error-message="A valid email address is required." />
+                {{ form_widget(registrationForm.email) }}
                 <label for="email">Email</label>
 
                 {{ form_label(registrationForm.email) }}
-                {{ form_widget(registrationForm.email) }}
+                
 
                 <span class="help-block">Type your email address.</span>
               </div>
               <div class="input-field">
                 {{ form_widget(registrationForm.plainPassword) }}
-                 {{ form_label(registrationForm.plainPassword) }}
+                {{ form_label(registrationForm.plainPassword) }}
                 <i class="fa fa-eye show-password"></i>
                 <span class="help-block">Type your password.</span>
-                
-                
               </div>
               <div class="input-field">
                 <input type="password" name="password_confirmation" id="password_confirmation" value="" required data-parsley-trigger="change" data-parsley-equalto="#password" data-parsley-error-message="Password does not match." />
@@ -94,12 +92,12 @@
                 <span class="help-block">Confirm your password.</span>
               </div>
               <div class="checkbox">
-               {{ form_widget(registrationForm.agreeTerms) }}
-                <label for="accept-terms">I have read and I accept the <a href="#!" target="_blank">Terms Of Use</a></label>
-
-                  
-                  
+                <input type="checkbox" name="accept-terms" value="1" id="accept-terms" required/>
+                <label for="accept-terms">I have read and I accept the 
+                <a href="#!" target="_blank">Terms Of Use</a></label>
               </div>
+              
+              {{ form_widget(registrationForm.agreeTerms) }}
 
               <button type="submit" class="btn btn-lg gradient secondary btn-block waves-effect waves-light mt-20 mb-20">Create an account</button>
               <div class="links">

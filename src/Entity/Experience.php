@@ -19,11 +19,16 @@ class Experience
     private Collection $duration;
 
     #[ORM\Column]
-    private ?int $experience = null;
+    private ?string $experience = null;
 
     public function __construct()
     {
         $this->duration = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->experience;
     }
 
     public function getId(): ?int
@@ -61,12 +66,12 @@ class Experience
         return $this;
     }
 
-    public function getExperience(): ?int
+    public function getExperience(): ?string
     {
         return $this->experience;
     }
 
-    public function setExperience(int $experience): static
+    public function setExperience(string $experience): static
     {
         $this->experience = $experience;
 

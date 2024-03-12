@@ -81,7 +81,7 @@ class Candidat
     #[ORM\JoinColumn(nullable: false)]
     private ?Gender $gender = null;
 
-    #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'candidatPassport', cascade: ['persist', 'remove'])]
     private ?Media $passport = null;
 
     #[ORM\OneToOne(inversedBy: 'candidatCv', cascade: ['persist', 'remove'])]
@@ -90,7 +90,7 @@ class Candidat
     #[ORM\OneToOne(inversedBy: 'profilPic', cascade: ['persist', 'remove'])]
     private ?Media $profilPic = null;
 
-    #[ORM\OneToOne(inversedBy: 'candidatUser', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
