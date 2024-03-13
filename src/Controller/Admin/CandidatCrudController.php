@@ -43,7 +43,7 @@ class CandidatCrudController extends AbstractCrudController
             AssociationField::new('passport'),
             AssociationField::new('cv'),
             AssociationField::new('profilPic'),
-            IntegerField::new('user'), // pas sur
+            IntegerField::new('user'), 
 
 
         ];

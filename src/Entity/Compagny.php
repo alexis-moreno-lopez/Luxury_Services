@@ -47,6 +47,11 @@ class Compagny
         $this->jobs = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->activityType;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -1,25 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{%  block metaEtLinkSupplementaire %}
+{% block title %}{% endblock %}
 
-    <meta name="base_url" content="http://www.fgtechs.fr/z-pedro/wwwluxuryservices">
-    <meta name="csrf-token" content="9Tnm0YBCxgVTxoqI1HzccsU5NuE9RughZmhpzgXn">
-    <!--  favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/img/ico/fav.png') }}">
-
-
+{% block metaSupp %}
 {% endblock %}
 
-{% block styleprofil %}
-    <style>
-        select {
-            display: block!important;
-        }
-    </style>
-{% endblock %}
+
 
 {% block body %}
-
+{% block differentestyleRegister %}
+<style>
+    select {
+        display: block!important;
+    }
+</style>
+{% endblock %}
 <div class="base">
 
     <!-- Page -->
@@ -48,7 +43,7 @@
                 <div class="row">
                     <div class="score-container">
                         <h4>
-                            <img src="https://i.imgur.com/s9bPVaK.gif" style="height: 80px; width: 201px;"> &nbsp;
+                            <img src="{{ asset('assets/img/leo.gif')}}" style="height: 80px; width: 201px;"> &nbsp;
                             &nbsp; Hooray ! Your profile is complete.
                         </h4>
                         <div class="c100 p100 small complete ">
@@ -269,16 +264,7 @@
 
 </div>
 
+{% block scriptSupp %}
 {% endblock %}
 
-{% block JavascriptDuBas %}
-
-<script type="text/javascript">
-
-    onAppReady(function() {
-        $('.preload').remove();
-    });
-</script>
-
 {% endblock %}
-

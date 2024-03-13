@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CandidatRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -72,22 +73,25 @@ class Candidat
 
 
     #[ORM\ManyToOne(inversedBy: 'duration')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Experience $experience = null;
 
 
 
     #[ORM\ManyToOne(inversedBy: 'candidats')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Gender $gender = null;
 
     #[ORM\OneToOne(inversedBy: 'candidatPassport', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Media $passport = null;
 
     #[ORM\OneToOne(inversedBy: 'candidatCv', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Media $cv = null;
 
     #[ORM\OneToOne(inversedBy: 'profilPic', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Media $profilPic = null;
 
     #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
@@ -99,6 +103,9 @@ class Candidat
     public function __construct()
     {
         $this->applies = new ArrayCollection();
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
+        $this->isAvailable = false;
     }
 
 
