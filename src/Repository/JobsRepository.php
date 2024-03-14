@@ -21,7 +21,17 @@ class JobsRepository extends ServiceEntityRepository
         parent::__construct($registry, Jobs::class);
     }
 
-    //    /**
+
+//    return   $this->Job[] //Liste des offres d'emploi.
+    
+//    public function findAll(): arraybb
+//    {
+//        return $this->createQueryBuilder('j')
+//            ->orderBy('j.id', 'DESC')
+//            ->getQuery()
+//            ->getResult();
+//    }
+    //     /**
     //     * @return Jobs[] Returns an array of Jobs objects
     //     */
     //    public function findByExampleField($value): array
